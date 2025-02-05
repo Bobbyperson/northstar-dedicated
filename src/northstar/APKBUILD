@@ -8,15 +8,11 @@ pkgdesc="Northstar binaries and mods (with experimental gamemode_fd_experimental
 url="https://northstar.tf"
 license="MIT"
 arch="x86_64"
+makedepends="git"
 
-source="https://github.com/R2Northstar/Northstar/releases/download/v${pkgver}/Northstar.release.v${pkgver}.zip \
-        https://github.com/Zanieon/NorthstarMods/archive/refs/heads/gamemode_fd_experimental.zip"
+source="https://github.com/R2Northstar/Northstar/releases/download/v${pkgver}/Northstar.release.v${pkgver}.zip"
 
-
-sha512sums="
-6b67abd22a5dd48eb9e44abad524ccf54f8e9b0b025e4021619093e3058a71e8d4a9769111b880a841e9243abde566152418ad50b34e9a8e17f5947434470df2  Northstar.release.v${pkgver}.zip
-6004dcef2384e99194716e5103d5612cb09956cf2e3eb290003770149ed0f64d473e7cf4ff7c7cd447d464ee09040e904af78823b7b38126c5535aae7c505326  gamemode_fd_experimental.zip
-"
+sha512sums="6b67abd22a5dd48eb9e44abad524ccf54f8e9b0b025e4021619093e3058a71e8d4a9769111b880a841e9243abde566152418ad50b34e9a8e17f5947434470df2  Northstar.release.v${pkgver}.zip"
 
 check() {
     ls "$srcdir"
@@ -25,23 +21,19 @@ check() {
     test -d "$srcdir/R2Northstar/mods/Northstar.CustomServers/mod/maps/graphs"
     test -d "$srcdir/R2Northstar/mods/Northstar.CustomServers/mod/maps/navmesh"
     test -f "$srcdir/bin/x64_dedi/d3d11.dll"
-    test -d "$srcdir/NorthstarMods-gamemode_fd_experimental/Northstar.Client"
-    test -d "$srcdir/NorthstarMods-gamemode_fd_experimental/Northstar.Custom"
-    test -d "$srcdir/NorthstarMods-gamemode_fd_experimental/Northstar.CustomServers"
 }
 
 package() {
-    rm "$srcdir"/*.zip
+    git clone -b gamemode_fd_experimental https://github.com/Zanieon/NorthstarMods "$srcdir/NorthstarMods"
+    rm -f "$srcdir"/*.zip
     mkdir -p "$pkgdir/usr/lib/northstar"
     cp -r "$srcdir/." "$pkgdir/usr/lib/northstar/"
-    rm -rf "$pkgdir/usr/lib/northstar/NorthstarMods-gamemode_fd_experimental"
+    rm -rf "$pkgdir/usr/lib/northstar/NorthstarMods"
     rm -rf "$pkgdir/usr/lib/northstar/R2Northstar/mods/Northstar.Client" \
            "$pkgdir/usr/lib/northstar/R2Northstar/mods/Northstar.Custom" \
            "$pkgdir/usr/lib/northstar/R2Northstar/mods/Northstar.CustomServers"
-
     install -d "$pkgdir/usr/lib/northstar/R2Northstar/mods"
-
-    cp -r "$srcdir/NorthstarMods-gamemode_fd_experimental/Northstar.Client" "$pkgdir/usr/lib/northstar/R2Northstar/mods/"
-    cp -r "$srcdir/NorthstarMods-gamemode_fd_experimental/Northstar.Custom" "$pkgdir/usr/lib/northstar/R2Northstar/mods/"
-    cp -r "$srcdir/NorthstarMods-gamemode_fd_experimental/Northstar.CustomServers" "$pkgdir/usr/lib/northstar/R2Northstar/mods/"
+    cp -r "$srcdir/NorthstarMods/Northstar.Client" "$pkgdir/usr/lib/northstar/R2Northstar/mods/"
+    cp -r "$srcdir/NorthstarMods/Northstar.Custom" "$pkgdir/usr/lib/northstar/R2Northstar/mods/"
+    cp -r "$srcdir/NorthstarMods/Northstar.CustomServers" "$pkgdir/usr/lib/northstar/R2Northstar/mods/"
 }
