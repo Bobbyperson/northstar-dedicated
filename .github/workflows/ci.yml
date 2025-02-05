@@ -36,7 +36,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{github.actor}}
-          password: ${{secrets.GITHUB_TOKEN}}
+          password: ${{secrets.TOKEN}}
 
       - id: build
         name: Build and push
@@ -94,7 +94,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{github.actor}}
-          password: ${{secrets.GITHUB_TOKEN}}
+          password: ${{secrets.TOKEN}}
 
       - name: Pull Docker image
         run: docker pull ${{needs.server-docker.outputs.image}}
