@@ -12,8 +12,6 @@ makedepends="git"
 
 source="https://github.com/R2Northstar/Northstar/releases/download/v${pkgver}/Northstar.release.v${pkgver}.zip"
 
-sha512sums="6b67abd22a5dd48eb9e44abad524ccf54f8e9b0b025e4021619093e3058a71e8d4a9769111b880a841e9243abde566152418ad50b34e9a8e17f5947434470df2  Northstar.release.v${pkgver}.zip"
-
 check() {
     ls "$srcdir"
     test -f "$srcdir/NorthstarLauncher.exe"
@@ -37,3 +35,5 @@ package() {
     cp -r "$srcdir/NorthstarMods/Northstar.Custom" "$pkgdir/usr/lib/northstar/R2Northstar/mods/"
     cp -r "$srcdir/NorthstarMods/Northstar.CustomServers" "$pkgdir/usr/lib/northstar/R2Northstar/mods/"
 }
+
+sha512sums="6b67abd22a5dd48eb9e44abad524ccf54f8e9b0b025e4021619093e3058a71e8d4a9769111b880a841e9243abde566152418ad50b34e9a8e17f5947434470df2  Northstar.release.v${pkgver}.zip"
