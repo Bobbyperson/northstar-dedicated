@@ -1,8 +1,8 @@
 <h1 align="center">northstar-dedicated</h1>
 
-**Docker image for the [Northstar](https://northstar.tf) dedicated server.** <a href="https://github.com/pg9182/northstar-dedicated/actions/workflows/ci.yml"><img src="https://github.com/pg9182/northstar-dedicated/actions/workflows/ci.yml/badge.svg?branch=master&event=push" align="right"/></a>
+**Docker image for the [Northstar](https://northstar.tf) dedicated server.** <a href="https://github.com/bobbyperson/northstar-dedicated/actions/workflows/ci.yml"><img src="https://github.com/bobbyperson/northstar-dedicated/actions/workflows/ci.yml/badge.svg?branch=master&event=push" align="right"/></a>
 
-[`ghcr.io/pg9182/northstar-dedicated:1-tf2.0.11.0`](https://ghcr.io/pg9182/northstar-dedicated)
+[`ghcr.io/bobbyperson/northstar-dedicated:1-tf2.0.11.0`](https://ghcr.io/bobbyperson/northstar-dedicated)
 
 ## Changes in this fork:
 This adds https://github.com/Zanieon/NorthstarMods/tree/gamemode_fd_experimental over default to make it easier for docker hosters.
@@ -26,7 +26,7 @@ This adds https://github.com/Zanieon/NorthstarMods/tree/gamemode_fd_experimental
 1.  Copy the game files to your server, optionally removing [unnecessary files](#qs-reduce-size) to reduce the size.
 2.  Start the container (replace `/path/to/titanfall2` with the patch from step 1):
     ```bash
-    docker run --rm --interactive --pull always --publish 8081:8081/tcp --publish 37015:37015/udp --mount "type=bind,source=/path/to/titanfall2,target=/mnt/titanfall,readonly" --env NS_SERVER_NAME="[YOUR-REGION] Your server name" ghcr.io/pg9182/northstar-dedicated:1-tf2.0.11.0
+    docker run --rm --interactive --pull always --publish 8081:8081/tcp --publish 37015:37015/udp --mount "type=bind,source=/path/to/titanfall2,target=/mnt/titanfall,readonly" --env NS_SERVER_NAME="[YOUR-REGION] Your server name" ghcr.io/bobbyperson/northstar-dedicated:1-tf2.0.11.0
     ```
 
 ## Versioning
