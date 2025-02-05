@@ -6,7 +6,7 @@ on:
       - ".github/workflows/ci.yml"
       - src/**
       - scripts/mktag.sh
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   server-docker:
