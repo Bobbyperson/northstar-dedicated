@@ -4,6 +4,9 @@
 
 [`ghcr.io/pg9182/northstar-dedicated:1-tf2.0.11.0`](https://ghcr.io/pg9182/northstar-dedicated)
 
+## Changes in this fork:
+This adds https://github.com/Zanieon/NorthstarMods/tree/gamemode_fd_experimental over default to make it easier for docker hosters.
+
 ## Features
 
 - **Much more efficient** than the running the server on Windows in general, especially around RAM usage.
@@ -463,7 +466,7 @@ version: "3.9"
 
 services:
   northstar1:
-    image: ghcr.io/pg9182/northstar-dedicated:1-tf2.0.11.0
+    image: ghcr.io/bobbyperson/northstar-dedicated:1-tf2.0.11.0
     pull_policy: always
     environment:
       - NS_PORT=37015
@@ -499,7 +502,7 @@ x-logging:
 services:
   northstar1:
     << : *logging
-    image: ghcr.io/pg9182/northstar-dedicated:1-tf2.0.11.0-ns1.6.3
+    image: ghcr.io/bobbyperson/northstar-dedicated:1-tf2.0.11.0-ns1.6.3
     pull_policy: always
     environment:
       - NS_PORT=37015
