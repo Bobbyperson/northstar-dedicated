@@ -23,6 +23,7 @@ check() {
 
 package() {
     git clone -b gamemode_fd_experimental https://github.com/Zanieon/NorthstarMods "$srcdir/NorthstarMods"
+    git -C "$srcdir/NorthstarMods" pull
     rm -f "$srcdir"/*.zip
     mkdir -p "$pkgdir/usr/lib/northstar"
     cp -r "$srcdir/." "$pkgdir/usr/lib/northstar/"
