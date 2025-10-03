@@ -12,6 +12,20 @@ makedepends="git"
 
 source="https://github.com/R2Northstar/Northstar/releases/download/v${pkgver}/Northstar.release.v${pkgver}.zip"
 
+prepare() {
+    local mods_path="$startdir/NorthstarMods"
+
+    if [ -d "$startdir/.git" ]; then
+        git -C "$startdir" submodule update --init --recursive --depth 1 -- NorthstarMods || true
+    fi
+
+    if [ ! -d "$mods_path" ]; then
+        echo "ERROR: Expected submodule at $mods_path. Make sure you've checked out submodules."
+        echo "e.g., git submodule update --init --recursive"
+        return 1
+    fi
+}
+
 check() {
     ls "$srcdir"
     test -f "$srcdir/NorthstarLauncher.exe"
@@ -22,20 +36,24 @@ check() {
 }
 
 package() {
-    git clone -b gamemode_fd_experimental https://github.com/Zanieon/NorthstarMods "$srcdir/NorthstarMods"
-    git -C "$srcdir/NorthstarMods" pull
+    local mods_src="$startdir/NorthstarMods"
+    local dest="$pkgdir/usr/lib/northstar"
+
     rm -f "$srcdir"/*.zip
-    mkdir -p "$pkgdir/usr/lib/northstar"
-    cp -r "$srcdir/." "$pkgdir/usr/lib/northstar/"
-    rm -rf "$pkgdir/usr/lib/northstar/NorthstarMods"
-    rm -rf "$pkgdir/usr/lib/northstar/R2Northstar/mods/Northstar.Client" \
-           "$pkgdir/usr/lib/northstar/R2Northstar/mods/Northstar.Custom" \
-           "$pkgdir/usr/lib/northstar/R2Northstar/mods/Northstar.CustomServers"
-    install -d "$pkgdir/usr/lib/northstar/R2Northstar/mods"
-    cp -r "$srcdir/NorthstarMods/Northstar.Client" "$pkgdir/usr/lib/northstar/R2Northstar/mods/"
-    cp -r "$srcdir/NorthstarMods/Northstar.Custom" "$pkgdir/usr/lib/northstar/R2Northstar/mods/"
-    cp -r "$srcdir/NorthstarMods/Northstar.CustomServers" "$pkgdir/usr/lib/northstar/R2Northstar/mods/"
+    mkdir -p "$dest"
+    cp -r "$srcdir/." "$dest/"
+
+    rm -rf "$dest/NorthstarMods"
+    rm -rf "$dest/R2Northstar/mods/Northstar.Client" \
+           "$dest/R2Northstar/mods/Northstar.Custom" \
+           "$dest/R2Northstar/mods/Northstar.CustomServers"
+
+    install -d "$dest/R2Northstar/mods"
+    cp -r "$mods_src/Northstar.Client"        "$dest/R2Northstar/mods/"
+    cp -r "$mods_src/Northstar.Custom"        "$dest/R2Northstar/mods/"
+    cp -r "$mods_src/Northstar.CustomServers" "$dest/R2Northstar/mods/"
 }
+
 sha512sums="
 f9acd68d031c7cbf4bdc040004a425d1fa9c6a17d441e014caa131eed269783c3c3f46452f12070bf664406fdfe9cb0f12b779bc20db12b2bed927e3f0012f6a  Northstar.release.v$pkgver.zip
 "

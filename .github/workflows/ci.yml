@@ -6,9 +6,6 @@ on:
       - ".github/workflows/ci.yml"
       - src/**
       - scripts/mktag.sh
-  workflow_dispatch:
-  schedule:
-    - cron: '0 5 * * 1'
 
 jobs:
   server-docker:
@@ -48,7 +45,8 @@ jobs:
           context: src
           push: true
           tags: ${{steps.tags.outputs.tags}}
-          no-cache: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           labels: |
             org.opencontainers.image.created=${{steps.tags.outputs.rfc3339}}
             org.opencontainers.image.authors=discord:pg9182#8484

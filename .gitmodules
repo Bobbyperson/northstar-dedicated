@@ -1,0 +1,4 @@
+[submodule "src/northstar/NorthstarMods"]
+	path = src/northstar/NorthstarMods
+	url = https://github.com/Zanieon/NorthstarMods
+	branch = gamemode_fd_experimental
