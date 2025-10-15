@@ -4,7 +4,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    target-branch: "main"
+    target-branch: "master"
     labels: ["automerge"]
     commit-message:
       prefix: "chore:"
