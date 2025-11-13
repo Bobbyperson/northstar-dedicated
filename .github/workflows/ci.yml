@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - ".github/workflows/ci.yml"
-      - src/**
-      - scripts/mktag.sh
 
 
 jobs:
