@@ -1,6 +1,6 @@
 # Maintainer: pg9182 <96569817+pg9182@users.noreply.github.com>
 pkgname=northstar
-pkgver=1.31.4
+pkgver=1.31.7
 pkgver_tf=2.0.11.0
 pkgrel=0
 pkgdesc="Northstar binaries and mods (with experimental gamemode_fd_experimental mods)"
@@ -55,5 +55,5 @@ package() {
 }
 
 sha512sums="
-ba87061fbb292c625af7e0cf9172d1e3bd0820b7a45617a2174ef2ee259fc3e610a8bb6d190b4e8a5627e865d49b748c45a9e3feab8fce8c974a25e035d3d2eb  Northstar.release.v$pkgver.zip
+c0fc78f75e77f0a1237d1a33f72a39521f6d211150a4cdc5b65fb89d390302ad86240dbf3f19abc7ced8561dc08f50e7398d3fedcf467589e7d12aa0a9f4e17e  Northstar.release.v$pkgver.zip
 "
