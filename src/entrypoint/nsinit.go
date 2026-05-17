@@ -174,10 +174,11 @@ func main() {
 
 	cmd := &exec.Cmd{
 		Path: "/usr/bin/nswrap",
-		Args: append([]string{"nswrap", nso.Path}, args...),
+		Dir:  nso.Path,
+		Args: append([]string{"nswrap", "-dedicated"}, args...),
 		Env: env([]string{"PATH", "HOSTNAME", "HOME", "USER", "WINEPREFIX", "WINESERVER"},
-			"NSWRAP_TITLE", sn,
-			"DISPLAY", "xvfb",
+			"NSWRAP_EXTWINE", "1",
+			"NSWRAP_INSTANCE", sn,
 		),
 		Stdin:  os.Stdin,
 		Stdout: os.Stdout,

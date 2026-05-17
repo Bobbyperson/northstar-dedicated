@@ -25,15 +25,12 @@ COPY --chown=nsbuild:nsbuild ./entrypoint/ /nsbuild/src/main/entrypoint/
 RUN ulimit -n 1024; cd /nsbuild/src/main/entrypoint && abuild -r
 
 FROM base
-RUN apk add --no-cache wine gnutls tzdata ca-certificates sudo xvfb
+RUN apk add --no-cache wine gnutls tzdata ca-certificates sudo
 RUN --mount=from=build-northstar,source=/nsbuild/packages/main/x86_64,target=/nsbuild/northstar \
     apk add --no-cache --allow-untrusted /nsbuild/northstar/*.apk
 RUN --mount=from=build-nswrap,source=/nsbuild/packages/main/x86_64,target=/nsbuild/nswrap \
     --mount=from=build-entrypoint,source=/nsbuild/packages/main/x86_64,target=/nsbuild/entrypoint \
     apk add --no-cache --allow-untrusted /nsbuild/nswrap/*.apk /nsbuild/entrypoint/*.apk
-
-# silence Xvfb xkbcomp warnings by working around the bug (present in libX11 1.7.2) fixed in libX11 1.8 by https://gitlab.freedesktop.org/xorg/lib/libx11/-/merge_requests/79
-RUN echo 'partial xkb_symbols "evdev" {};' > /usr/share/X11/xkb/symbols/inet
 
 RUN adduser -D northstar && \
     echo 'northstar ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/northstar && \
