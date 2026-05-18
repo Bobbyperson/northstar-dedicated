@@ -48,7 +48,6 @@ wine64 wineboot --init
 
 wine64 reg add 'HKCU\Software\Wine' /v 'Version' /t REG_SZ /d 'win10' /f
 wine64 reg add 'HKCU\Software\Wine\Drivers' /v 'Audio' /t REG_SZ /d '' /f
-wine64 reg add 'HKCU\Software\Wine\Drivers' /v 'Graphics' /t REG_SZ /d 'null' /f
 wine64 reg add 'HKCU\Software\Wine\WineDbg' /v 'ShowCrashDialog' /t REG_DWORD /d 0 /f
 
 wine64 reg add 'HKLM\System\CurrentControlSet\Services\WineBus' /v 'DisableHidraw' /t REG_DWORD /d 1 /f
